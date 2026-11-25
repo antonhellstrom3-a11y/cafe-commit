@@ -16,6 +16,7 @@ function addToOrder(item) {
 function removeFromOrder(index) {
   order.splice(index);
   orderCount.textContent = order.length;
+  order.splice(index,1);
   renderOrder();
 }
 
