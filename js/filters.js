@@ -14,6 +14,8 @@ function getVisibleItems() {
     items.sort((a, b) => a.price - b.price);
   } else if (sortValue === "price-desc"){
     items.sort((a, b) => b.price - a.price);
+  } else if (sortValue === "name-asc") {
+    items.sort((a, b) => a.name.localeCompare(b.name, "sv"));
   }
 
   return items;
