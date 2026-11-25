@@ -60,5 +60,10 @@ deleteBtn.addEventListener("click", () => {
 });
 
 placeOrderButton.addEventListener("click", () => {
+  if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+    return;
+  }
+
   orderMessage.textContent = "Tack för din beställning!";
 });
