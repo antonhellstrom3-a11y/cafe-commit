@@ -12,7 +12,7 @@ function getVisibleItems() {
 
   if (sortValue === "price-asc") {
     items.sort((a, b) => a.price - b.price);
-  } else if (sortValue === "prise-dec"){
+  } else if (sortValue === "price-desc"){
     items.sort((a, b) => b.price - a.price);
   }
 
