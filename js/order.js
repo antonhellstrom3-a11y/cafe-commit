@@ -15,11 +15,18 @@ function addToOrder(item) {
 
 function removeFromOrder(index) {
   order.splice(index);
+  orderCount.textContent = order.length;
   renderOrder();
 }
 
 // Ritar upp beställningen och räknar ut totalen
 function renderOrder() {
+   if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+  } else {
+    orderMessage.textContent = "";
+  }
+  
   orderList.innerHTML = "";
   let total = 0;
 
@@ -45,6 +52,18 @@ function renderOrder() {
   orderTotal.textContent = "Totalt: " + total + " kr";
 }
 
+const deleteBtn = document.querySelector("#deleteBtn");
+
+deleteBtn.addEventListener("click", () => {
+  order = [];
+  renderOrder();
+});
+
 placeOrderButton.addEventListener("click", () => {
+  if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+    return;
+  }
+
   orderMessage.textContent = "Tack för din beställning!";
 });
