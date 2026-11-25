@@ -31,6 +31,13 @@ function createMenuCard(item) {
     li.append(badge);
   }
 
+  if (item.rating >= 4.5){
+    const badge = document.createElement("span");
+    badge.classList.add("badge", "badge.populärt");
+    badge.textContent = "Populärt";
+    li.append(badge);    
+  }
+
   const button = document.createElement("button");
   button.classList.add("button", "button-small");
   button.textContent = "Lägg till";
