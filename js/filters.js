@@ -8,6 +8,11 @@ function getVisibleItems() {
 
   items = items.filter(item => item.price <= maxPrice);
 
+  const category = document.querySelector("#category-filter").value;
+  if (category !== "alla") {
+    items = items.filter((item) => item.category === category);
+  }
+
   const sortValue = document.querySelector("#sort").value;
 
   if (sortValue === "price-asc") {
@@ -23,6 +28,7 @@ function getVisibleItems() {
   return items;
 }
 
+document.querySelector("#category-filter").addEventListener("change", updateMenu);
 document.querySelector("#sort").addEventListener("change", updateMenu);
 
 const maxPriceInput = document.querySelector('#max-price');
