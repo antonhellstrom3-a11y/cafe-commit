@@ -20,6 +20,12 @@ function removeFromOrder(index) {
 
 // Ritar upp beställningen och räknar ut totalen
 function renderOrder() {
+   if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+  } else {
+    orderMessage.textContent = "";
+  }
+  
   orderList.innerHTML = "";
   let total = 0;
 
