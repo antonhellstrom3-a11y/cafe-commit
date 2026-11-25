@@ -50,7 +50,6 @@ const deleteBtn = document.querySelector("#deleteBtn");
 
 deleteBtn.addEventListener("click", () => {
   order = [];
-  orderCount.textContent = order.length;
   renderOrder();
 });
 
