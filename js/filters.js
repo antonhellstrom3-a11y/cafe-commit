@@ -34,7 +34,10 @@ maxPriceInput.addEventListener('input', () => {
 });
 
 // Anropa updateMenu() varje gång ett filter ändras
+const resultCount = document.querySelector("#result-count");
+
 function updateMenu() {
   const items = getVisibleItems();
   renderMenu(items);
+  resultCount.textContent = `Visar ${items.length} av 18 rätter`;
 }
