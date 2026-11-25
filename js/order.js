@@ -18,6 +18,15 @@ function removeFromOrder(index) {
   orderCount.textContent = order.length;
   renderOrder();
 }
+function getOrderTotal(order) {
+  let total = 0;
+
+  order.forEach((item) => {
+    total += item.price;
+  });
+
+  return total;
+}
 
 // Ritar upp beställningen och räknar ut totalen
 function renderOrder() {
@@ -28,7 +37,7 @@ function renderOrder() {
   }
   
   orderList.innerHTML = "";
-  let total = 0;
+  // let total = 0;
 
   order.forEach((item, index) => {
     const li = document.createElement("li");
@@ -46,9 +55,9 @@ function renderOrder() {
     li.append(text, removeButton);
     orderList.append(li);
 
-    total = total + item.price;
+    
   });
-
+  const total = getOrderTotal(order);
   orderTotal.textContent = "Totalt: " + total + " kr";
 }
 
@@ -60,6 +69,16 @@ deleteBtn.addEventListener("click", () => {
 });
 
 placeOrderButton.addEventListener("click", () => {
+  const total = getOrderTotal(order);
+  let radio = document.querySelector('input[name="serving"][value="Äta här"]');
+  if (radio.checked){
+      orderMessage.textContent = `"Tack! Din beställning (Äta här) på ${total} kr är mottagen."`;
+  } else{
+    orderMessage.textContent = `"Tack! Din beställning (Ta med) på ${total} kr är mottagen."`;
+  }
+  orderList.remove();
+  orderTotal.remove();
+  
   if (order.length === 0) {
     orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
     return;
