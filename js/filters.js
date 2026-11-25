@@ -4,12 +4,32 @@ function getVisibleItems() {
   // En kopia av menyn, så att originalet aldrig ändras
   let items = [...menu];
 
-  let maxPrice = number(document.querySelector('#max-price').value);
+  const maxPrice = Number(document.querySelector('#max-price').value);
 
   items = items.filter(item => item.price <= maxPrice);
 
+  const category = document.querySelector("#category-filter").value;
+  if (category !== "alla") {
+    items = items.filter((item) => item.category === category);
+  }
+
+  const sortValue = document.querySelector("#sort").value;
+
+  if (sortValue === "price-asc") {
+    items.sort((a, b) => a.price - b.price);
+  } else if (sortValue === "price-desc"){
+    items.sort((a, b) => b.price - a.price);
+  } else if (sortValue === "name-asc") {
+    items.sort((a, b) => a.name.localeCompare(b.name, "sv"));
+  } else if (sortValue === "rating-desc") {
+    items.sort((a, b) => b.rating - a.rating);
+  }
+
   return items;
 }
+
+document.querySelector("#category-filter").addEventListener("change", updateMenu);
+document.querySelector("#sort").addEventListener("change", updateMenu);
 
 const maxPriceInput = document.querySelector('#max-price');
 const maxPriceValue = document.querySelector('#max-price-value');
@@ -20,7 +40,10 @@ maxPriceInput.addEventListener('input', () => {
 });
 
 // Anropa updateMenu() varje gång ett filter ändras
+const resultCount = document.querySelector("#result-count");
+
 function updateMenu() {
   const items = getVisibleItems();
   renderMenu(items);
+  resultCount.textContent = `Visar ${items.length} av 18 rätter`;
 }

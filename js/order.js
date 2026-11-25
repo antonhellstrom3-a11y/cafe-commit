@@ -14,7 +14,8 @@ function addToOrder(item) {
 }
 
 function removeFromOrder(index) {
-  order.splice(index,1);
+  order.splice(index);
+  orderCount.textContent = order.length;
   renderOrder();
 }
 function getOrderTotal(order) {
@@ -29,6 +30,12 @@ function getOrderTotal(order) {
 
 // Ritar upp beställningen och räknar ut totalen
 function renderOrder() {
+   if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+  } else {
+    orderMessage.textContent = "";
+  }
+  
   orderList.innerHTML = "";
   // let total = 0;
 
@@ -54,6 +61,13 @@ function renderOrder() {
   orderTotal.textContent = "Totalt: " + total + " kr";
 }
 
+const deleteBtn = document.querySelector("#deleteBtn");
+
+deleteBtn.addEventListener("click", () => {
+  order = [];
+  renderOrder();
+});
+
 placeOrderButton.addEventListener("click", () => {
   const total = getOrderTotal(order);
   let radio = document.querySelector('input[name="serving"][value="Äta här"]');
@@ -65,4 +79,10 @@ placeOrderButton.addEventListener("click", () => {
   orderList.remove();
   orderTotal.remove();
   
+  if (order.length === 0) {
+    orderMessage.textContent = "Din beställning är tom – lägg till något gott från menyn!";
+    return;
+  }
+
+  orderMessage.textContent = "Tack för din beställning!";
 });
