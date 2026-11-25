@@ -16,7 +16,6 @@ function addToOrder(item) {
 function removeFromOrder(index) {
   order.splice(index);
   orderCount.textContent = order.length;
-  order.splice(index,1);
   renderOrder();
 }
 
@@ -46,6 +45,14 @@ function renderOrder() {
 
   orderTotal.textContent = "Totalt: " + total + " kr";
 }
+
+const deleteBtn = document.querySelector("#deleteBtn");
+
+deleteBtn.addEventListener("click", () => {
+  order = [];
+  orderCount.textContent = order.length;
+  renderOrder();
+});
 
 placeOrderButton.addEventListener("click", () => {
   orderMessage.textContent = "Tack för din beställning!";
