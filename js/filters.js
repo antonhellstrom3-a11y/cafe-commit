@@ -4,7 +4,7 @@ function getVisibleItems() {
   // En kopia av menyn, så att originalet aldrig ändras
   let items = [...menu];
 
-  let maxPrice = number(document.querySelector('#max-price').value);
+  const maxPrice = Number(document.querySelector('#max-price').value);
 
   items = items.filter(item => item.price <= maxPrice);
 
